@@ -12,5 +12,8 @@
     "server"
   ],
   "author": "Harvey Pfoccori",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
 }
