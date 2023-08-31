@@ -50,6 +50,9 @@ router.post('/message', (req, res) => {
 //     res.send('Hola');
 // })
 
+// Servir estaticos con express
+app.use('/app', express.static('public'))
+
 // Levantamos un puerto de escucha para express
 app.listen(3000);
 console.log('La aplicacion esta escuchando en http://localhost:3000');
