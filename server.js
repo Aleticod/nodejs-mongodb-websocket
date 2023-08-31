@@ -32,7 +32,8 @@ router.get('/message', function(req, res) {
 router.post('/message', (req, res) => {
     console.log(req.body); // Impresion del body de request
     console.log(req.query); // Impresion del query de request
-    res.send('Hola, mensaje ' + req.body.text + ' anadido con POST'); // Aqui se envia el body al cliente
+    //res.send('Hola, mensaje ' + req.body.text + ' anadido con POST'); // Aqui se envia el body al cliente
+    res.status(201).send({ error: "", message: "Esto es un mensaje con POST"}); // Aqui se envia el body al cliente
 })
 
 // Creamos una ruta para que express haga uso y nos devuelva algo
