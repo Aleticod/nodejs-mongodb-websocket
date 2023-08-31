@@ -12,13 +12,19 @@ const router = express.Router();
 var app = express();
 // Hacemos uso de body-parser
 app.use(bodyParser.json()); // Para cuerpos que contienen json
-app.use(bodyParser.urlencoded({extended: false})); // Para url encoded
+app.use(bodyParser.urlencoded({extended: true})); // Para url encoded
 // Hacemos uso del router
 app.use(router);
 
 
 // Gestion de peticiones GET
 router.get('/message', function(req, res) {
+    // Lectura de la cabecera de request
+    console.log(req.headers);
+    // Generar una header personalizado de response
+    res.header({
+        "Custon-Header": "Nuestro valor personalizado"
+    })
     res.send('Hola, te devuelvo la lista de mensajes con GET');
 })
 
