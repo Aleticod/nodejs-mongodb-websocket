@@ -37,7 +37,7 @@ router.post('/message', (req, res) => {
     console.log(req.body); // Impresion del body de request
     console.log(req.query); // Impresion del query de request
     if (req.query.error == 'ok') {
-        response.error(req, res, 'Error simulado', 400 );
+        response.error(req, res, 'Error inesperado', 500, 'Es oslo una simulacion de los errores' );
     } else {
         response.success(req, res, 'Creado correctamente', 201);
     }
