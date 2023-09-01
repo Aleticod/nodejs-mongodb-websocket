@@ -12,8 +12,9 @@ const router = express.Router();
 
 // Gestion de peticiones GET
 router.get('/', function(req, res) {
+    const filterMessage = req.query.user || null;
     // El usuario solicita la lista de mensajes
-    controller.getMessages()
+    controller.getMessages(filterMessage)
         .then((messageList) => {
             response.success(req, res, messageList, 200);
         })
