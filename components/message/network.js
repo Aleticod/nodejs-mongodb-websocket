@@ -4,6 +4,9 @@ const express = require('express');
 // Importamos el modulo de response
 const response = require('./../../network/response');
 
+// Importamos el controlador de message
+const controller = require('./controller');
+
 // Creamos una instancia de router de express
 const router = express.Router();
 
@@ -21,13 +24,14 @@ router.get('/', function(req, res) {
 
 // Gestion de peticiones POST
 router.post('/', (req, res) => {
-    console.log(req.body); // Impresion del body de request
-    console.log(req.query); // Impresion del query de request
-    if (req.query.error == 'ok') {
-        response.error(req, res, 'Error inesperado', 500, 'Es oslo una simulacion de los errores' );
-    } else {
-        response.success(req, res, 'Creado correctamente', 201);
-    }
+    // El usuario y el message vendran desde el body de la peticion
+    controller.addMessage(req.body.user, req.body.message)
+        .then((fullMessage) => {
+            response.success(req, res, fullMessage, 201)
+        })
+        .catch((e) => {
+            response.error(req, res, 'Informacion invalida', 400, 'Error en el contenido')
+        });
     //res.send('Hola, mensaje ' + req.body.text + ' anadido con POST'); // Aqui se envia el body al cliente
     // res.status(201).send({ error: "", message: "Esto es un mensaje con POST"}); // Aqui se envia el body al cliente
 })
