@@ -1,5 +1,6 @@
 // Importamos express
 const express = require('express');
+const multer = require('multer');
 
 // Importamos el modulo de response
 const response = require('./../../network/response');
@@ -9,6 +10,11 @@ const controller = require('./controller');
 
 // Creamos una instancia de router de express
 const router = express.Router();
+
+// Uso de multer, para almacenar el archivo
+const upload = multer({
+    dest: 'uploads/',
+});
 
 // Gestion de peticiones GET
 router.get('/', function(req, res) {
@@ -24,7 +30,7 @@ router.get('/', function(req, res) {
 })
 
 // Gestion de peticiones POST
-router.post('/', (req, res) => {
+router.post('/', upload.single('file'), (req, res) => {
     // El usuario y el message vendran desde el body de la peticion
     controller.addMessage(req.body.chat, req.body.user, req.body.message)
         .then((fullMessage) => {
