@@ -26,7 +26,7 @@ router.get('/', function(req, res) {
 // Gestion de peticiones POST
 router.post('/', (req, res) => {
     // El usuario y el message vendran desde el body de la peticion
-    controller.addMessage(req.body.user, req.body.message)
+    controller.addMessage(req.body.chat, req.body.user, req.body.message)
         .then((fullMessage) => {
             response.success(req, res, fullMessage, 201)
         })

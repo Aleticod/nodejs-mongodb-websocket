@@ -6,6 +6,10 @@ const Schema = mongoose.Schema;
 
 // Creamos un Schema para nuestra base de datos
 const mySchema = new Schema({
+    caht: {
+        type: Schema.ObjectId,
+        ref: 'Chat'
+    },
     user: {
         type: Schema.ObjectId,
         ref: 'User'
