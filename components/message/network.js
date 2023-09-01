@@ -12,14 +12,14 @@ const router = express.Router();
 
 // Gestion de peticiones GET
 router.get('/', function(req, res) {
-    // Lectura de la cabecera de request
-    console.log(req.headers);
-    // Generar una header personalizado de response
-    res.header({
-        "Custon-Header": "Nuestro valor personalizado"
-    });
-    response.success(req, res, 'Lista de nombres');
-    // res.send('Hola, te devuelvo la lista de mensajes con GET');
+    // El usuario solicita la lista de mensajes
+    controller.getMessages()
+        .then((messageList) => {
+            response.success(req, res, messageList, 200);
+        })
+        .catch((e) => {
+            response.error(req, res, 'Problema en la base de datos', 500, e);
+        })
 })
 
 // Gestion de peticiones POST
@@ -30,7 +30,7 @@ router.post('/', (req, res) => {
             response.success(req, res, fullMessage, 201)
         })
         .catch((e) => {
-            response.error(req, res, 'Informacion invalida', 400, 'Error en el contenido')
+            response.error(req, res, 'Informacion invalida', 400, e)
         });
     //res.send('Hola, mensaje ' + req.body.text + ' anadido con POST'); // Aqui se envia el body al cliente
     // res.status(201).send({ error: "", message: "Esto es un mensaje con POST"}); // Aqui se envia el body al cliente
