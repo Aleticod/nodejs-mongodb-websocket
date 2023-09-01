@@ -13,7 +13,7 @@ const router = express.Router();
 
 // Uso de multer, para almacenar el archivo
 const upload = multer({
-    dest: 'uploads/',
+    dest: 'public/files/',
 });
 
 // Gestion de peticiones GET
@@ -31,8 +31,9 @@ router.get('/', function(req, res) {
 
 // Gestion de peticiones POST
 router.post('/', upload.single('file'), (req, res) => {
+    console.log(req.file);
     // El usuario y el message vendran desde el body de la peticion
-    controller.addMessage(req.body.chat, req.body.user, req.body.message)
+    controller.addMessage(req.body.chat, req.body.user, req.body.message, req.file)
         .then((fullMessage) => {
             response.success(req, res, fullMessage, 201)
         })
