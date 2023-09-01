@@ -36,4 +36,16 @@ router.post('/', (req, res) => {
     // res.status(201).send({ error: "", message: "Esto es un mensaje con POST"}); // Aqui se envia el body al cliente
 })
 
+router.patch('/:id', function (req, res) {
+    console.log(req.params.id);
+    controller.updateMessage(req.params.id, req.body.message)
+        .then((data) => {
+            response.success(req, res, data, 201)
+        })
+        .catch((e) => {
+            response.error(req, res, 'Error interno', 500, e);
+        });
+    //res.send('ok');
+})
+
 module.exports = router;
