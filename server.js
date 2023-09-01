@@ -5,6 +5,12 @@ const express = require('express');
 // Importamos body-parser
 const bodyParser = require('body-parser');
 
+// Importamos la conexion a la base de datos
+const db = require('./db');
+
+// Conectamos a la base de datos
+db('mongodb://root:root@127.0.0.1:27017/?authMechanism=DEFAULT&tls=false');
+
 // Importamos router de message
 const router = require('./network/routes');
 
