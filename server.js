@@ -8,8 +8,11 @@ const bodyParser = require('body-parser');
 // Importamos la conexion a la base de datos
 const db = require('./db');
 
+// Importamos el archivo de configuraciones
+const config = require('./config');
+
 // Conectamos a la base de datos
-db('mongodb://root:root@127.0.0.1:27017/?authMechanism=DEFAULT&tls=false');
+db(config.dbUrl);
 
 // Importamos router de message
 const router = require('./network/routes');
@@ -31,8 +34,8 @@ router(app);
 // })
 
 // Servir estaticos con express
-app.use('/app', express.static('public'))
+app.use(config.publicRoute, express.static('public'))
 
 // Levantamos un puerto de escucha para express
-app.listen(3000);
-console.log('La aplicacion esta escuchando en http://localhost:3000');
+app.listen(config.port);
+console.log('La aplicacion esta escuchando en ' + config.host + ':' + config.port);
